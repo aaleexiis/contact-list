@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "interview assignment",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test mocha -- timeout 10000 --recursive  \"src/server/test/**/**/*.test.js\" --exit",
+    "test-watch": "nodemon --exec 'npm test'"
   },
   "author": "Aleksandra Mladenovic",
   "license": "ISC",
@@ -33,5 +34,11 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-things": "^0.2.0",
+    "mocha": "^5.2.0",
+    "supertest": "^3.3.0"
+  }
 }

@@ -4,6 +4,9 @@ const models = require('@ContactList/app/setup');
 module.exports = (app) => {
     const api = app.server.app.api.contact;
 
+    /**
+     * Endpoint creates one fake contact.
+     */
     app.route('/api/v1/contacts/setup')
         .post(api.setup(models.Contact));
 
@@ -21,13 +24,13 @@ module.exports = (app) => {
         .get(api.getContacts(models.Contact));
 
     /**
-     * Update contact
+     * Endpoint modifies existing contact
      */
     app.route('/api/v1/contacts/modify')
         .post(api.modify(models.Contact));
 
     /**
-     * Delete contact with given id
+     * Endpoint deletes contact with given id
      */
     app.route('/api/v1/contacts/delete/:id')
         .delete(api.delete(models.Contact));
