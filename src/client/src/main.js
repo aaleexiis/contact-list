@@ -3,13 +3,34 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueCookie from 'vue-cookie'
+import Vuetify from 'vuetify'
 
-Vue.config.productionTip = false
+// Helpers
+import colors from 'vuetify/es5/util/colors'
+
+import('../node_modules/vuetify/dist/vuetify.min.css')
+
+Vue.use(VueCookie);
+Vue.use(Vuetify, {
+  theme: {
+    primary: '#7FB800',
+    secondary: '#00A6ED',
+    info: '#F5BB00',
+    error: '#F6511D',
+    accent: '#587291'
+  }
+});
+
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { App },
-  template: '<App/>'
+  data: {
+    drawer: null
+  },
+  template: '<App/>',
+  components: { App }
 })

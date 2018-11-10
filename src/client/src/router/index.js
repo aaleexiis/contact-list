@@ -1,15 +1,27 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 
-Vue.use(Router)
+// Pages
+import Home from '@/components/Home'
 
-export default new Router({
+// Global components
+import Header from '@/components/Header'
+
+// Register components
+Vue.component('app-header', Header);
+
+Vue.use(Router);
+const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'Home',
+      components: {
+        default: Home,
+        header: Header
+      }
     }
   ]
-})
+});
+
+export default router

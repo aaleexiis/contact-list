@@ -24,4 +24,14 @@ npm run unit
 npm test
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### Color schema
+
+- PRIMARY COLOR: #7FB800 (apple green)
+- PRIMARY COLOR LIGHTER: #96C42E (yellow green)
+- PRIMARY COLOR DARKER: #689700 (avocado)
+- SECONDARY COLOR: #00A6ED (vivid cerulen)
+- SECONDARY COLOR LIGHTER: #2EB6F0 (picton blue)
+- SECONDARY COLOR DARKER: #0088C2 (blue ncs)
+- ERROR COLOR: #F6511D (orioels orange)
+- ACCENT COLOR: #F5BB00 (selective yellow )
+- INFO COLOR: #587291 (ucla blue)

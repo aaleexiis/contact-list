@@ -8,29 +8,83 @@ const api = {};
 //create contact
 api.setup = (Contact) => (req, res) => {
     winston.info(`setup in`);
-    const contact = new Contact({
-        name: 'Brokula',
-        surname: 'Zeljko',
-        email: 'brokula.zeljko@gmail.com',
-        favourite: true,
-        phone: [{
-            label: 'mobile',
-            number: '+385911234567'
-        }, {
-            label: 'home',
-            number: '+38511234567'
-        }]
-    });
-    contact.save(error => {
+    const contacts = [
+        new Contact({
+            name: 'Brokula',
+            surname: 'Zeljko',
+            email: 'brokula.zeljko@gmail.com',
+            favourite: true,
+            phone: [{
+                label: 'mobile',
+                number: '+385911234567'
+            }, {
+                label: 'home',
+                number: '+38511234567'
+            }]
+        }),
+        new Contact({
+            name: 'Susjed',
+            surname: 'Bobic',
+            email: 'susjed.bobic@gmail.com',
+            favourite: false,
+            phone: [{
+                label: 'mobile',
+                number: '+385911111111'
+            }, {
+                label: 'home',
+                number: '+38511222222'
+            }]
+        }),
+        new Contact({
+            name: 'Gospoda',
+            surname: 'Cizmic',
+            email: 'gospoda.cizmic@gmail.com',
+            favourite: true,
+            phone: [{
+                label: 'home',
+                number: '+385112333333'
+            }]
+        }),
+        new Contact({
+            name: 'Ujak',
+            surname: 'Tomo',
+            email: 'ujak.tomo@gmail.com',
+            favourite: true,
+            phone: [{
+                label: 'mobile',
+                number: '+385911234444'
+            }, {
+                label: 'home',
+                number: '+38511234555'
+            }]
+        }),
+        new Contact({
+            name: 'Gospodin',
+            surname: 'Mrkvic',
+            email: 'gospodin.mrkvic@gmail.com',
+            favourite: false,
+            phone: [{
+                label: 'home',
+                number: '+38511234566'
+            }]
+        })
+    ];
+    Contact.create(contacts, (error) => {
         if (error) {
-            throw error;
+            winston.error(`Error while creating mock contacts. Error: ${error.message}`);
+            res.status(400)
+                .json({
+                    success: false,
+                    message: 'Error while creating mock contacts'
+                });
         }
-        winston.info('Contact was successfully set up');
-        res.json({
+        winston.info('Contacts are successfully set up');
+        res.status(200)
+            .json({
             success: true,
-            message: 'Contact was successfully set up'
+            message: 'Contact are successfully set up'
         });
-    })
+    });
 };
 
 /**
