@@ -7,6 +7,7 @@ const consign = require('consign');
 const cors = require('cors');
 const winston = require('winston');
 const dotenv = require('dotenv').config();
+const models = require('@ContactList/app/setup');
 
 const config = require('./index.js');
 const database = require('./database')(mongoose, config);

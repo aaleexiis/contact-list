@@ -3,6 +3,8 @@ import Router from 'vue-router'
 
 // Pages
 import Home from '@/components/Home'
+import CreateContact from '@/components/CreateContact'
+import ViewContact from '@/components/ViewContact'
 
 // Global components
 import Header from '@/components/Header'
@@ -20,7 +22,26 @@ const router = new Router({
         default: Home,
         header: Header
       }
-    }
+    },
+    {
+      path: '/contacts/create',
+      name: 'CreateContact',
+      components: {
+        default: CreateContact,
+        header: Header
+      }
+    },
+    {
+      path: '/contacts/view/:id',
+      name: 'ViewContact',
+      components: {
+        default: ViewContact,
+        header: Header
+      },
+      props: (route) => ({
+        mode: route.query.mode
+      })
+}
   ]
 });
 

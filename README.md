@@ -43,7 +43,7 @@ npm run dev
 node server.js
 ```
 - test Contact List API with Postamn
-- test Entropy app through browser: http://localhost:8080/#/
+- test Contact List app through browser: http://localhost:8080/#/
 
 To run the back-end test suite, run the following command from the project root directory
 ```bash

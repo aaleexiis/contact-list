@@ -7,7 +7,6 @@ const api = {};
 
 //create contact
 api.setup = (Contact) => (req, res) => {
-    winston.info(`setup in`);
     const contacts = [
         new Contact({
             name: 'Brokula',
