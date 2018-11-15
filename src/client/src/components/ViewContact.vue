@@ -174,7 +174,7 @@
           name: this.name,
           surname: this.surname,
           email: this.email,
-          favourite: false,
+          favourite: this.favourite,
           phone: this.phones
         }
 
