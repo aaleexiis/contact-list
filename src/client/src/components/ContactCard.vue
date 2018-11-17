@@ -1,5 +1,5 @@
 <template>
-  <v-card color="transparent" light>
+  <v-card color="transparent" light height="100%">
     <v-layout>
       <v-flex xs5>
         <v-avatar v-if="image"
