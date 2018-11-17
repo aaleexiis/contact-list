@@ -7,6 +7,9 @@ module.exports = (mongoose, config) => {
     mongoose.connect(config.database, {
         useNewUrlParser: true,
         promiseLibrary: global.Promise
+    },function(){
+        /* Drop the DB */
+        mongoose.connection.db.dropDatabase();
     });
 
     database.on('error', error => winston.error(`Connection to ContactList database failed: ${error}`));
