@@ -270,7 +270,7 @@
           this.surname = data.data[0].surname;
           if(data.data[0].image) {
             debugger
-            this.image = data.data[0].image.data.data; //save for edit
+            this.image = data.data[0].image.data; //save for edit
             let picture64Bit = data.data[0].image.data.data; //convert to bas64 for avatar display
             picture64Bit = Buffer(picture64Bit, 'binary').toString('base64');
             this.avatar = `data:image/png;base64,${picture64Bit}`;

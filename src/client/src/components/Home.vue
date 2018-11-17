@@ -72,10 +72,7 @@
       mockContacts () {
         Axios.post(`${BaseURL}/api/v1/contacts/setup`)
           .then(({data}) => {
-            const snackbar = showSnackbar(data);
-            this.snackbarText = snackbar.snackbarText;
-            this.snackbarColor = snackbar.snackbarColor;
-            this.snackbar = snackbar.snackbar;
+            this.showSnackbar(data);
             Axios.get(`${BaseURL}/api/v1/contacts`)
               .then(({data}) => {
                 if(data === ''){
@@ -96,10 +93,7 @@
         this.deleteContactDialog = false;
         Axios.delete(`${BaseURL}/api/v1/contacts/delete/${this.deleteContactId}`)
           .then(({ data }) => {
-            const snackbar = showSnackbar(data);
-            this.snackbarText = snackbar.snackbarText;
-            this.snackbarColor = snackbar.snackbarColor;
-            this.snackbar = snackbar.snackbar;
+            this.showSnackbar(data);
             Axios.get(`${BaseURL}/api/v1/contacts`)
               .then(({data}) => {
                 if(data === ''){
@@ -110,10 +104,7 @@
                 }
               });
           }).catch((err) => {
-            const snackbar = showSnackbar(err.response.data);
-            this.snackbarText = snackbar.snackbarText;
-            this.snackbarColor = snackbar.snackbarColor;
-            this.snackbar = snackbar.snackbar;
+          this.showSnackbar(err.response.data);
           });
       },
       favouriteContact (contactId, favourite){
@@ -123,10 +114,7 @@
         };
         Axios.post(`${BaseURL}/api/v1/contacts/modify`, requestBody)
           .then(({ data }) => {
-            const snackbar = showSnackbar(data);
-            this.snackbarText = snackbar.snackbarText;
-            this.snackbarColor = snackbar.snackbarColor;
-            this.snackbar = snackbar.snackbar;
+            this.showSnackbar(data);
             Axios.get(`${BaseURL}/api/v1/contacts`)
               .then(({data}) => {
                 if(data === ''){
@@ -137,11 +125,14 @@
                 }
               });
           }).catch((err) => {
-            const snackbar = showSnackbar(err.response.data);
-            this.snackbarText = snackbar.snackbarText;
-            this.snackbarColor = snackbar.snackbarColor;
-            this.snackbar = snackbar.snackbar;
+            this.showSnackbar(err.response.data);
         });
+      },
+      showSnackbar(data){
+        const snackbar = showSnackbar(data);
+        this.snackbarText = snackbar.snackbarText;
+        this.snackbarColor = snackbar.snackbarColor;
+        this.snackbar = snackbar.snackbar;
       }
     },
     watch: {

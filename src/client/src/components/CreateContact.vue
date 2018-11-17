@@ -137,6 +137,7 @@
           })
         }
 
+        debugger
         const newContact = {
           name: this.name,
           surname: this.surname,
