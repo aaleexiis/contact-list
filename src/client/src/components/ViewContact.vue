@@ -4,9 +4,30 @@
     <v-container fluid grid-list-md>
       <v-layout row wrap>
         <v-flex d-flex xs12 sm6 md4>
-          <v-card color="purple" dark>
-            <v-card-title primary class="title">Lorem</v-card-title>
-            <v-card-text>image</v-card-text>
+          <v-card color="transparent" light flat>
+            <v-layout row>
+              <v-flex xs5>
+                <v-avatar v-if="avatar"
+                  :size="avatarSize"
+                  color="grey lighten-4"
+                >
+                  <img :src="avatar" alt="avatar">
+                </v-avatar>
+                <avatar v-else :fullname="`${name} ${surname}`" :size="avatarSize"></avatar>
+              </v-flex>
+            </v-layout>
+            <v-layout row>
+              <picture-input v-if="mode === 'edit'"
+                ref="pictureInput"
+                width="600"
+                height="600"
+                margin="16"
+                accept="image/jpeg,image/png"
+                size="5"
+                button-class="v-btn outline info"
+                @change="onImageChange">
+              </picture-input>
+            </v-layout>
           </v-card>
         </v-flex>
         <v-flex d-flex xs12 sm6 md8>
@@ -121,15 +142,25 @@
   </main>
 </template>
 <script>
+  import Vue from 'vue'
   import Phone from '@/components/Phone'
+  import PictureInput from 'vue-picture-input'
   import router from '@/router'
   import Axios from 'axios'
   import {BaseURL, showSnackbar} from '@/utils/utils'
+  import VueInitialsImg from 'vue-initials-img';
+  import VueLetterAvatar from 'vue-letter-avatar';
+  import Avatar from 'vue-avatar-component'
+
+  Vue.use(VueInitialsImg);
+  Vue.use(VueLetterAvatar);
 
   export default {
     name: 'ViewContact',
     components: {
-      phone: Phone
+      phone: Phone,
+      PictureInput,
+      Avatar
     },
     data: () => ({
       snackbarText: '',
@@ -138,6 +169,8 @@
       snackbar: false,
       name: '',
       surname: '',
+      image: null,
+      avatar: null,
       email: '',
       favourite: false,
       children: [],
@@ -146,7 +179,8 @@
       phoneId: 0,
       contactId: '',
       mode: 'view',
-      deleteContactDialog: false
+      deleteContactDialog: false,
+      avatarSize: 96
     }),
     methods: {
       addPhone () {
@@ -161,7 +195,6 @@
       save(){
         this.phones = [];
         const phoneComponents = this.$children[2].$children.filter(child => { return child.$options.name === "Phone" });
-        debugger;
         for(let index in phoneComponents){
           this.phones.push({
             label: phoneComponents[index].label,
@@ -169,10 +202,12 @@
           })
         }
 
+        debugger
         const modifiedContact = {
           id: this.contactId,
           name: this.name,
           surname: this.surname,
+          image: this.image,
           email: this.email,
           favourite: this.favourite,
           phone: this.phones
@@ -215,6 +250,15 @@
             this.snackbarColor = snackbar.snackbarColor;
             this.snackbar = snackbar.snackbar;
         });
+      },
+      onImageChange (image) {
+        if (image) {
+          this.avatar = image;
+          image = image.replace('data:image/jpeg;base64,', '');
+          this.image = Buffer.from(image, 'base64')
+        } else {
+          console.log('FileReader API not supported: use the <form>, Luke!')
+        }
       }
     },
     created() {
@@ -224,6 +268,13 @@
         .then(({data}) => {
           this.name = data.data[0].name;
           this.surname = data.data[0].surname;
+          if(data.data[0].image) {
+            debugger
+            this.image = data.data[0].image.data.data; //save for edit
+            let picture64Bit = data.data[0].image.data.data; //convert to bas64 for avatar display
+            picture64Bit = Buffer(picture64Bit, 'binary').toString('base64');
+            this.avatar = `data:image/png;base64,${picture64Bit}`;
+          }
           this.email = data.data[0].email;
           this.favourite = data.data[0].favourite;
           this.phones = data.data[0].phone;

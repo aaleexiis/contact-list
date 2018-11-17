@@ -1,7 +1,7 @@
 <template>
   <main class="l-home-page">
     <app-header></app-header>
-    <v-layout align-end justify-end row fill-height>
+    <v-layout v-if="mock" align-end justify-end row fill-height>
       <v-btn flat color="secondary" @click="mockContacts()">Mock Contacts</v-btn>
     </v-layout>
     <v-layout align-center justify-center row fill-height>
@@ -64,7 +64,8 @@
         snackbarTimeout: 6000,
         snackbar: false,
         deleteContactDialog: false,
-        deleteContactId: ''
+        deleteContactId: '',
+        mock: true
       }
     },
     methods: {
@@ -83,6 +84,7 @@
                 else if(data.success){
                   this.contacts = data.data;
                 }
+                this.mock = false;
               });
           });
       },

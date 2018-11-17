@@ -24,8 +24,9 @@ app.use(express.static(__dirname + "/../../client/dist"));
 app.set('appPath', __dirname + "/../../client/dist");
 app.get('/', (req, res) => res.sendfile(app.get('appPath') + '/index.html'));
 app.use(express.static('.'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+//extend limit because of images
+app.use(bodyParser.json({limit: "50mb"}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 app.use(morgan('dev'));
 app.use(cors());
 

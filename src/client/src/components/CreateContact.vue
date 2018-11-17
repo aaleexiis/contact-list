@@ -4,9 +4,19 @@
     <v-container fluid grid-list-md>
       <v-layout row wrap>
         <v-flex d-flex xs12 sm6 md4>
-          <v-card color="purple" dark>
-            <v-card-title primary class="title">Lorem</v-card-title>
-            <v-card-text>image</v-card-text>
+          <v-card color="transparent" light flat>
+            <v-layout>
+              <picture-input
+                ref="pictureInput"
+                width="600"
+                height="600"
+                margin="16"
+                accept="image/jpeg,image/png"
+                size="5"
+                button-class="v-btn outline info"
+                @change="onImageChange">
+              </picture-input>
+            </v-layout>
           </v-card>
         </v-flex>
         <v-flex d-flex xs12 sm6 md8>
@@ -81,6 +91,7 @@
 </template>
 <script>
   import Phone from '@/components/Phone'
+  import PictureInput from 'vue-picture-input'
   import router from '@/router'
   import Axios from 'axios'
   import {BaseURL, showSnackbar} from '@/utils/utils'
@@ -88,7 +99,8 @@
   export default {
     name: 'CreateContact',
     components: {
-      phone: Phone
+      phone: Phone,
+      PictureInput
     },
     data: () => ({
       snackbarText: '',
@@ -101,6 +113,7 @@
       children: [],
       phones: [],
       phoneId: 0,
+      image: null
     }),
 
     methods: {
@@ -127,6 +140,7 @@
         const newContact = {
           name: this.name,
           surname: this.surname,
+          image: this.image,
           email: this.email,
           favourite: false,
           phone: this.phones
@@ -150,6 +164,15 @@
       },
       cancel(){
         router.push('/')
+      },
+      onImageChange (image) {
+        if (image) {
+          debugger
+          image = image.replace('data:image/jpeg;base64,', '');
+          this.image = Buffer.from(image, 'base64')
+        } else {
+          console.log('FileReader API not supported: use the <form>, Luke!')
+        }
       }
     }
   }

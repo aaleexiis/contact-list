@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const {ObjectID} = require('mongodb');
 const winston = require('winston');
 const _ = require('lodash');
+var fs = require('fs');
 
 const api = {};
 
