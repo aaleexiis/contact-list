@@ -129,7 +129,6 @@
       save(){
         this.phones = [];
         const phoneComponents = this.$children[2].$children.filter(child => { return child.$options.name === "Phone" });
-        debugger;
         for(let index in phoneComponents){
           this.phones.push({
             label: phoneComponents[index].label,
@@ -137,7 +136,6 @@
           })
         }
 
-        debugger
         const newContact = {
           name: this.name,
           surname: this.surname,
@@ -168,7 +166,6 @@
       },
       onImageChange (image) {
         if (image) {
-          debugger
           image = image.replace('data:image/jpeg;base64,', '');
           this.image = Buffer.from(image, 'base64')
         } else {
