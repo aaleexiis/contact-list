@@ -55,7 +55,7 @@ npm test
 Contact List is deployed on Heroku.
 
 ### Heroku
-- Heroku app page: https://dashboard.heroku.com/apps/entropy-mgmt -TODO
+- Heroku app page: https://sheltered-anchorage-46960.herokuapp.com/
 
 ### Deploying
 - webpack is used as a module bundle
@@ -71,7 +71,7 @@ npm run build
 ```
 npm start
 ```
-- test in browser: http://localhost:3001/#/
+- test in a browser: http://localhost:3001/#/
 
 4. if everything works as expected
 
