@@ -2,7 +2,7 @@
   <main class="l-home-page">
     <app-header></app-header>
     <v-layout v-if="mock" align-end justify-end row fill-height>
-      <v-btn flat color="secondary" @click="mockContacts()">Mock Contacts</v-btn>
+      <v-btn flat color="secondary" @click="mockContacts()">Mock Contacts {{BaseURL}}</v-btn>
     </v-layout>
     <v-layout align-center justify-center row fill-height>
       <v-flex xs12>
@@ -151,6 +151,7 @@
       }
     },
     created() {
+      debugger;
       Axios.get(`${BaseURL}/api/v1/contacts`)
         .then(({data}) => {
           if(data.success){

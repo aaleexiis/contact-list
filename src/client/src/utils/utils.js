@@ -4,7 +4,7 @@
  */
 const BaseURL =
   (process.env.NODE_ENV && (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')) ?
-    `https://${window.location.hostname}` :
+    `https://${window.location.hostname}` : //add s and remove :3001
     `http://${window.location.hostname}:3001`;
 
 const showSnackbar = (data) => {
